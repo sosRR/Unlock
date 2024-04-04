@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@id/frameLayout"
+                      android:layout_width="fill_parent"
+                      android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:rsuapp="http://schemas.android.com/apk/res-auto">
+  <TextView android:gravity="center"
+            android:id="@id/error_fragment_text"
+            android:layout_width="176.0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="304.0dp"
+            android:text="@string/message_server_unreachable"
+            rsuapp:layout_constraintBottom_toBottomOf="parent"
+            rsuapp:layout_constraintEnd_toEndOf="parent"
+            rsuapp:layout_constraintStart_toStartOf="parent"
+            rsuapp:layout_constraintTop_toBottomOf="@id/imageView" />
+  <ImageView android:id="@id/imageView"
+             android:layout_width="43.0dp"
+             android:layout_height="47.0dp"
+             android:layout_marginTop="252.0dp"
+             android:layout_marginBottom="2.0dp"
+             android:src="@drawable/baseline_warning_black_24dp"
+             android:contentDescription="@string/message_server_unreachable"
+             rsuapp:layout_constraintBottom_toTopOf="@id/error_fragment_text"
+             rsuapp:layout_constraintEnd_toEndOf="parent"
+             rsuapp:layout_constraintStart_toStartOf="parent"
+             rsuapp:layout_constraintTop_toTopOf="parent" />
+  <Button android:id="@id/error_server_continue"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="63.0dp"
+          android:text="@string/message_continue"
+          rsuapp:layout_constraintEnd_toEndOf="parent"
+          rsuapp:layout_constraintStart_toStartOf="parent"
+          rsuapp:layout_constraintTop_toBottomOf="@id/error_fragment_text" />
+</androidx.constraintlayout.widget.ConstraintLayout>

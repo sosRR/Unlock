@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@id/frameLayout2"
+                      android:layout_width="fill_parent"
+                      android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:rsuapp="http://schemas.android.com/apk/res-auto">
+  <TextView android:gravity="center"
+            android:id="@id/textView4"
+            android:layout_width="224.0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/full_unlocked_message"
+            rsuapp:layout_constraintBottom_toBottomOf="parent"
+            rsuapp:layout_constraintEnd_toEndOf="parent"
+            rsuapp:layout_constraintStart_toStartOf="parent"
+            rsuapp:layout_constraintTop_toTopOf="parent" />
+  <Button android:id="@id/button_restart_now"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16.0dp"
+          android:text="@string/full_unlocked_restart_now"
+          android:layout_marginStart="1.0dp"
+          android:layout_marginEnd="26.0dp"
+          rsuapp:layout_constraintEnd_toStartOf="@id/button_restart_later"
+          rsuapp:layout_constraintHorizontal_chainStyle="packed"
+          rsuapp:layout_constraintStart_toStartOf="parent"
+          rsuapp:layout_constraintTop_toBottomOf="@id/textView4" />
+  <Button android:id="@id/button_restart_later"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16.0dp"
+          android:text="@string/full_unlocked_restart_later"
+          rsuapp:layout_constraintEnd_toEndOf="parent"
+          rsuapp:layout_constraintStart_toEndOf="@id/button_restart_now"
+          rsuapp:layout_constraintTop_toBottomOf="@id/textView4" />
+</androidx.constraintlayout.widget.ConstraintLayout>
