@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  <Preference android:focusable="true"
+              android:clickable="false"
+              android:title="@string/device_status_temporary_unlocked"
+              android:key="status_temporary_unlocked"
+              android:summary="@string/device_status_temporary_unlocked_description" />
+  <Preference android:title="@string/device_full_unlock_title"
+              android:selectable="true"
+              android:key="full_unlock_eligible"
+              android:summary="@string/device_full_unlock_requirements" />
+  <Preference android:selectable="true"
+              android:key="full_unlock_activate"
+              android:summary="@string/device_full_unlock_try" />
+</PreferenceScreen>
