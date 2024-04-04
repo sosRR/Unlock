@@ -1,0 +1,236 @@
+
+1	<?xml version='1.0' encoding='utf-8' ?> 
+2	<manifest android:versionCode="51302" 
+3	          android:versionName="5.13.2" 
+4	          android:compileSdkVersion="33" 
+5	          android:compileSdkVersionCodename="13" 
+6	          package="com.tmobile.rsuapp" 
+7	          platformBuildVersionCode="33" 
+8	          platformBuildVersionName="13" xmlns:android="http://schemas.android.com/apk/res/android"> 
+9	  <uses-sdk android:minSdkVersion="28" 
+10	            android:targetSdkVersion="33" /> 
+11	  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> 
+12	  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> 
+13	  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> 
+14	  <uses-permission android:name="android.permission.INTERNET" /> 
+15	  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> 
+16	  <uses-permission android:name="com.tmobile.rsu.permission.RSU_SYSTEM_SERVICE" /> 
+17	  <queries> 
+18	    <package android:name="com.tmobile.rsusrv" /> 
+19	  </queries> 
+20	  <uses-permission android:name="android.permission.WAKE_LOCK" /> 
+21	  <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" /> 
+22	  <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> 
+23	  <uses-permission android:name="com.google.android.gms.permission.AD_ID" /> 
+24	  <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" /> 
+25	  <application android:theme="@style/AppTheme" 
+26	               android:label="@string/app_name" 
+27	               android:icon="@mipmap/ic_launcher" 
+28	               android:allowBackup="false" 
+29	               android:supportsRtl="true" 
+30	               android:extractNativeLibs="false" 
+31	               android:appComponentFactory="androidx.core.app.CoreComponentFactory"> 
+32	    <receiver android:name="com.tmobile.rsuapp.RebootReceiver" 
+33	              android:enabled="true" 
+34	              android:exported="false"> 
+35	      <intent-filter> 
+36	        <action android:name="com.tmobile.rsuapp.REBOOT_DEVICE" /> 
+37	      </intent-filter> 
+38	    </receiver> 
+39	    <activity android:name="com.tmobile.rsuapp.MainActivity" 
+40	              android:exported="true"> 
+41	      <intent-filter> 
+42	        <action android:name="android.intent.action.MAIN" /> 
+43	        <category android:name="android.intent.category.LAUNCHER" /> 
+44	      </intent-filter> 
+45	    </activity> 
+46	    <provider android:name="com.tmobile.rsuapp.HistoryProvider" 
+47	              android:exported="false" 
+48	              android:authorities="com.tmobile.rsuapp.provider" /> 
+49	    <provider android:name="com.tmobile.rsuapp.FileProvider" 
+50	              android:exported="false" 
+51	              android:authorities="com.tmobile.rsuapp.FileProvider" 
+52	              android:grantUriPermissions="true"> 
+53	      <meta-data android:name="android.support.FILE_PROVIDER_PATHS" 
+54	                 android:resource="@xml/file_paths" /> 
+55	    </provider> 
+56	    <receiver android:name="com.tmobile.rsuapp.BootReceiver" 
+57	              android:enabled="true" 
+58	              android:exported="false"> 
+59	      <intent-filter android:priority="20"> 
+60	        <action android:name="android.intent.action.BOOT_COMPLETED" /> 
+61	        <action android:name="android.intent.action.QUICKBOOT_POWERON" /> 
+62	        <action android:name="android.intent.action.ACTION_SHUTDOWN" /> 
+63	      </intent-filter> 
+64	    </receiver> 
+65	    <receiver android:name="com.tmobile.rsuapp.UpdateReceiver" 
+66	              android:enabled="true" 
+67	              android:exported="false"> 
+68	      <intent-filter android:priority="20"> 
+69	        <action android:name="android.intent.action.MY_PACKAGE_REPLACED" /> 
+70	      </intent-filter> 
+71	    </receiver> 
+72	    <service android:name="com.tmobile.rsuapp.services.FirebaseService" 
+73	             android:enabled="true" 
+74	             android:exported="false"> 
+75	      <intent-filter> 
+76	        <action android:name="com.google.firebase.MESSAGING_EVENT" /> 
+77	      </intent-filter> 
+78	    </service> 
+79	    <provider android:name="androidx.startup.InitializationProvider" 
+80	              android:exported="false" 
+81	              android:authorities="com.tmobile.rsuapp.androidx-startup"> 
+82	      <meta-data android:name="androidx.work.WorkManagerInitializer" 
+83	                 android:value="androidx.startup" /> 
+84	      <meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" 
+85	                 android:value="androidx.startup" /> 
+86	      <meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer" 
+87	                 android:value="androidx.startup" /> 
+88	    </provider> 
+89	    <service android:name="androidx.work.impl.background.systemalarm.SystemAlarmService" 
+90	             android:enabled="@bool/enable_system_alarm_service_default" 
+91	             android:exported="false" 
+92	             android:directBootAware="false" /> 
+93	    <service android:name="androidx.work.impl.background.systemjob.SystemJobService" 
+94	             android:permission="android.permission.BIND_JOB_SERVICE" 
+95	             android:enabled="@bool/enable_system_job_service_default" 
+96	             android:exported="true" 
+97	             android:directBootAware="false" /> 
+98	    <service android:name="androidx.work.impl.foreground.SystemForegroundService" 
+99	             android:enabled="@bool/enable_system_foreground_service_default" 
+100	             android:exported="false" 
+101	             android:directBootAware="false" /> 
+102	    <receiver android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver" 
+103	              android:enabled="true" 
+104	              android:exported="false" 
+105	              android:directBootAware="false" /> 
+106	    <receiver android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy" 
+107	              android:enabled="false" 
+108	              android:exported="false" 
+109	              android:directBootAware="false"> 
+110	      <intent-filter> 
+111	        <action android:name="android.intent.action.ACTION_POWER_CONNECTED" /> 
+112	        <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" /> 
+113	      </intent-filter> 
+114	    </receiver> 
+115	    <receiver android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy" 
+116	              android:enabled="false" 
+117	              android:exported="false" 
+118	              android:directBootAware="false"> 
+119	      <intent-filter> 
+120	        <action android:name="android.intent.action.BATTERY_OKAY" /> 
+121	        <action android:name="android.intent.action.BATTERY_LOW" /> 
+122	      </intent-filter> 
+123	    </receiver> 
+124	    <receiver android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy" 
+125	              android:enabled="false" 
+126	              android:exported="false" 
+127	              android:directBootAware="false"> 
+128	      <intent-filter> 
+129	        <action android:name="android.intent.action.DEVICE_STORAGE_LOW" /> 
+130	        <action android:name="android.intent.action.DEVICE_STORAGE_OK" /> 
+131	      </intent-filter> 
+132	    </receiver> 
+133	    <receiver android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy" 
+134	              android:enabled="false" 
+135	              android:exported="false" 
+136	              android:directBootAware="false"> 
+137	      <intent-filter> 
+138	        <action android:name="android.net.conn.CONNECTIVITY_CHANGE" /> 
+139	      </intent-filter> 
+140	    </receiver> 
+141	    <receiver android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver" 
+142	              android:enabled="false" 
+143	              android:exported="false" 
+144	              android:directBootAware="false"> 
+145	      <intent-filter> 
+146	        <action android:name="android.intent.action.BOOT_COMPLETED" /> 
+147	        <action android:name="android.intent.action.TIME_SET" /> 
+148	        <action android:name="android.intent.action.TIMEZONE_CHANGED" /> 
+149	      </intent-filter> 
+150	    </receiver> 
+151	    <receiver android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver" 
+152	              android:enabled="@bool/enable_system_alarm_service_default" 
+153	              android:exported="false" 
+154	              android:directBootAware="false"> 
+155	      <intent-filter> 
+156	        <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" /> 
+157	      </intent-filter> 
+158	    </receiver> 
+159	    <receiver android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver" 
+160	              android:permission="android.permission.DUMP" 
+161	              android:enabled="true" 
+162	              android:exported="true" 
+163	              android:directBootAware="false"> 
+164	      <intent-filter> 
+165	        <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" /> 
+166	      </intent-filter> 
+167	    </receiver> 
+168	    <service android:name="com.google.firebase.components.ComponentDiscoveryService" 
+169	             android:exported="false" 
+170	             android:directBootAware="true"> 
+171	      <meta-data android:name="com.google.firebase.components:com.google.firebase.crashlytics.CrashlyticsRegistrar" 
+172	                 android:value="com.google.firebase.components.ComponentRegistrar" /> 
+173	      <meta-data android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar" 
+174	                 android:value="com.google.firebase.components.ComponentRegistrar" /> 
+175	      <meta-data android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar" 
+176	                 android:value="com.google.firebase.components.ComponentRegistrar" /> 
+177	      <meta-data android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar" 
+178	                 android:value="com.google.firebase.components.ComponentRegistrar" /> 
+179	      <meta-data android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar" 
+180	                 android:value="com.google.firebase.components.ComponentRegistrar" /> 
+181	    </service> 
+182	    <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" 
+183	              android:permission="com.google.android.c2dm.permission.SEND" 
+184	              android:exported="true"> 
+185	      <intent-filter> 
+186	        <action android:name="com.google.android.c2dm.intent.RECEIVE" /> 
+187	      </intent-filter> 
+188	    </receiver> 
+189	    <service android:name="com.google.firebase.messaging.FirebaseMessagingService" 
+190	             android:exported="false" 
+191	             android:directBootAware="true"> 
+192	      <intent-filter android:priority="-500"> 
+193	        <action android:name="com.google.firebase.MESSAGING_EVENT" /> 
+194	      </intent-filter> 
+195	    </service> 
+196	    <receiver android:name="com.google.android.gms.measurement.AppMeasurementReceiver" 
+197	              android:enabled="true" 
+198	              android:exported="false" /> 
+199	    <service android:name="com.google.android.gms.measurement.AppMeasurementService" 
+200	             android:enabled="true" 
+201	             android:exported="false" /> 
+202	    <service android:name="com.google.android.gms.measurement.AppMeasurementJobService" 
+203	             android:permission="android.permission.BIND_JOB_SERVICE" 
+204	             android:enabled="true" 
+205	             android:exported="false" /> 
+206	    <activity android:theme="@android:style/Theme.Translucent.NoTitleBar" 
+207	              android:name="com.google.android.gms.common.api.GoogleApiActivity" 
+208	              android:exported="false" /> 
+209	    <provider android:name="com.google.firebase.provider.FirebaseInitProvider" 
+210	              android:exported="false" 
+211	              android:authorities="com.tmobile.rsuapp.firebaseinitprovider" 
+212	              android:initOrder="100" 
+213	              android:directBootAware="true" /> 
+214	    <meta-data android:name="com.google.android.gms.version" 
+215	               android:value="@integer/google_play_services_version" /> 
+216	    <uses-library android:name="androidx.window.extensions" 
+217	                  android:required="false" /> 
+218	    <uses-library android:name="androidx.window.sidecar" 
+219	                  android:required="false" /> 
+220	    <service android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery" 
+221	             android:exported="false"> 
+222	      <meta-data android:name="backend:com.google.android.datatransport.cct.CctBackendFactory" 
+223	                 android:value="cct" /> 
+224	    </service> 
+225	    <service android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService" 
+226	             android:permission="android.permission.BIND_JOB_SERVICE" 
+227	             android:exported="false" /> 
+228	    <receiver android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver" 
+229	              android:exported="false" /> 
+230	    <service android:name="androidx.room.MultiInstanceInvalidationService" 
+231	             android:exported="false" 
+232	             android:directBootAware="true" /> 
+233	  </application> 
+234	</manifest> 
+235	 
